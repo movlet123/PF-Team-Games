@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PF TEAM</title>
+  <link rel="icon" type="image/png" href="logo/logotipe.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Кнопка переключения темы -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+    <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <div class="site-wrapper">
+    <header class="site-header">
+      <img src="logo/logotipe.png" alt="PF TEAM" class="header-logo">
+      <h1 class="pf-title">PF TEAM</h1>
+      <p class="games-subtitle">GAMES</p>
+    </header>
+
+    <div id="cardsGrid"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Скрипт переключения темы
+    (function() {
+      const themeToggle = document.getElementById('themeToggle');
+      const body = document.body;
+      
+      // Проверяем сохранённую тему
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        body.classList.add('light-theme');
+      }
+      
+      // Переключение темы
+      themeToggle.addEventListener('click', function() {
+        body.classList.toggle('light-theme');
+        
+        // Сохраняем выбор
+        if (body.classList.contains('light-theme')) {
+          localStorage.setItem('theme', 'light');
+        } else {
+          localStorage.setItem('theme', 'dark');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

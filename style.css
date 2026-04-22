@@ -1,0 +1,407 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ========== ТЁМНАЯ ТЕМА (по умолчанию) ========== */
+:root {
+  --bg-body: #0c0c0c;
+  --card-bg: #1a1a1a;
+  --text-main: #ffffff;
+  --text-secondary: #a0a0a0;
+  --accent-color: #f5c518;
+  --accent-dim: rgba(245, 197, 24, 0.15);
+  --border-light: #2c2c2c;
+  --border-hover: #f5c518;
+  --toggle-bg: #1a1a1a;
+  --toggle-color: #f5c518;
+  --toggle-border: #2c2c2c;
+  --radius-card: 20px;
+  --radius-image: 16px;
+  --transition-theme: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-hover: 0 20px 36px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--border-hover);
+}
+
+/* ========== СВЕТЛАЯ ТЕМА ========== */
+body.light-theme {
+  --bg-body: #f4f5f7;
+  --card-bg: #ffffff;
+  --text-main: #191c21;
+  --text-secondary: #5a6375;
+  --accent-color: #2563eb;
+  --accent-dim: rgba(37, 99, 235, 0.1);
+  --border-light: #e4e8ec;
+  --border-hover: #2563eb;
+  --toggle-bg: #ffffff;
+  --toggle-color: #2563eb;
+  --toggle-border: #e4e8ec;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 16px 32px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--border-hover);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-body);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  transition: background var(--transition-theme);
+  position: relative;
+}
+
+.site-wrapper {
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* ========== КНОПКА ПЕРЕКЛЮЧЕНИЯ ТЕМЫ ========== */
+.theme-toggle {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--toggle-bg);
+  border: 1.5px solid var(--toggle-border);
+  color: var(--toggle-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-theme);
+  box-shadow: var(--shadow-sm);
+  z-index: 1000;
+  padding: 0;
+  outline: none;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 20px var(--accent-dim);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Иконки темы */
+.theme-icon {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  transition: opacity 0.3s ease, transform 0.5s ease;
+}
+
+.theme-icon-sun {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+.theme-icon-moon {
+  opacity: 0;
+  transform: rotate(-90deg);
+}
+
+/* В светлой теме показываем луну, прячем солнце */
+body.light-theme .theme-icon-sun {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+body.light-theme .theme-icon-moon {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+/* ========== ЗАГОЛОВОК ========== */
+.site-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.header-logo {
+  display: block;
+  margin: 0 auto 12px;
+  width: 40px;
+  height: auto;
+  filter: drop-shadow(0 0 8px var(--accent-dim));
+  transition: filter var(--transition-theme), transform 0.3s ease;
+}
+
+.header-logo:hover {
+  transform: scale(1.05);
+}
+
+/* В светлой теме убираем сильное свечение */
+body.light-theme .header-logo {
+  filter: drop-shadow(0 2px 6px rgba(37, 99, 235, 0.2));
+}
+
+.pf-title {
+  font-size: 72px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  line-height: 1;
+  text-shadow: 0 2px 10px var(--accent-dim);
+  margin-top: 0;
+  transition: color var(--transition-theme), text-shadow var(--transition-theme);
+}
+
+.games-subtitle {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 10px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-top: 8px;
+  line-height: 1;
+  transition: color var(--transition-theme);
+}
+
+/* ========== СЕТКА КАРТОЧЕК ========== */
+#cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+/* ========== КАРТОЧКА ========== */
+.game-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text-main);
+  transition: all var(--transition-theme), 
+              transform var(--transition-fast), 
+              box-shadow var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  outline: 1px solid transparent;
+  outline-offset: 2px;
+}
+
+.game-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Светлая тема — фон карточки при наведении */
+body.light-theme .game-card:hover {
+  background: #fafbfc;
+}
+
+body:not(.light-theme) .game-card:hover {
+  background: #202020;
+}
+
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 16px;
+  background: var(--card-bg);
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-light);
+  box-sizing: border-box;
+  transition: background var(--transition-theme), border-color var(--transition-theme);
+}
+
+.card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 0.5s ease, border-color var(--transition-theme), border-radius var(--transition-theme);
+  border-radius: var(--radius-image);
+  display: block;
+  border: 1px solid var(--border-light);
+}
+
+.game-card:hover .card-image {
+  transform: scale(1.04);
+  border-color: var(--border-hover);
+}
+
+/* Оверлей с иконкой Play */
+.play-overlay {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-fast), background var(--transition-theme);
+  z-index: 2;
+  border-radius: var(--radius-image);
+}
+
+/* В светлой теме оверлей светлее */
+body.light-theme .play-overlay {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.game-card:hover .play-overlay {
+  opacity: 1;
+}
+
+.play-overlay svg {
+  filter: drop-shadow(0 4px 12px var(--accent-dim));
+  transform: scale(0.85);
+  transition: transform var(--transition-fast), filter var(--transition-theme), color var(--transition-theme);
+  color: var(--accent-color);
+}
+
+.game-card:hover .play-overlay svg {
+  transform: scale(1);
+}
+
+.card-info {
+  padding: 18px 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 75px;
+  background: var(--card-bg);
+  border-top: 1px solid var(--border-light);
+  transition: all var(--transition-theme);
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  color: var(--text-main);
+  letter-spacing: -0.2px;
+  transition: color var(--transition-theme);
+}
+
+.game-card:hover .card-title {
+  color: var(--accent-color);
+}
+
+/* Заглушка */
+.loading-placeholder {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px;
+  background: var(--card-bg);
+  border-radius: var(--radius-card);
+  color: var(--text-secondary);
+  font-weight: 600;
+  border: 2px dashed var(--border-light);
+  font-size: 16px;
+  transition: all var(--transition-theme);
+}
+
+/* ========== АДАПТИВ ========== */
+@media (max-width: 1000px) {
+  #cardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .pf-title {
+    font-size: 60px;
+  }
+  .games-subtitle {
+    font-size: 28px;
+    letter-spacing: 8px;
+  }
+  .theme-toggle {
+    top: 16px;
+    right: 16px;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 24px 16px;
+  }
+  .site-header {
+    margin-bottom: 32px;
+  }
+  .header-logo {
+    width: 30px;
+    margin-bottom: 8px;
+  }
+  .pf-title {
+    font-size: 42px;
+    letter-spacing: 2px;
+  }
+  .games-subtitle {
+    font-size: 22px;
+    letter-spacing: 6px;
+  }
+  #cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .card-image-wrapper {
+    padding: 12px;
+  }
+  .play-overlay {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+  }
+  .card-info {
+    padding: 14px 10px;
+    min-height: 65px;
+  }
+  .card-title {
+    font-size: 13px;
+  }
+  .theme-toggle {
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+  }
+  .theme-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  #cardsGrid {
+    grid-template-columns: 1fr;
+  }
+  .header-logo {
+    width: 25px;
+  }
+  .pf-title {
+    font-size: 36px;
+  }
+  .games-subtitle {
+    font-size: 18px;
+    letter-spacing: 4px;
+  }
+}
