@@ -2,6 +2,11 @@
   // ---------- РЕДАКТИРУЙТЕ ЭТОТ МАССИВ ----------
   const places = [
     {
+      link: "https://www.roblox.com/games/79853207819116/Trolls-Cant-Slap-A-Tower-3",
+      image: "logo/trolls3.png",
+      title: "TROLLS CAN'T SLAP A TOWER 3"
+    },
+    {
       link: "https://www.roblox.com/games/98971668084244/Trolls-Cant-Slap-A-Tower-2",
       image: "logo/trolls2.png",
       title: "TROLLS CAN'T SLAP A TOWER 2"
@@ -10,11 +15,6 @@
       link: "https://www.roblox.com/games/97313985971036/Trolls-Cant-Slap-A-Tower",
       image: "logo/trolls.png",
       title: "TROLLS CAN'T SLAP A TOWER"
-    },
-    {
-      link: "https://www.roblox.com/games/79853207819116/Trolls-Cant-Slap-A-Tower-3",
-      image: "logo/trolls3.png",
-      title: "TROLLS CAN'T SLAP A TOWER 3"
     },
 
   ];
