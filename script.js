@@ -15,8 +15,7 @@
       link: "https://www.roblox.com/games/97313985971036/Trolls-Cant-Slap-A-Tower",
       image: "logo/trolls.png",
       title: "TROLLS CAN'T SLAP A TOWER"
-    },
-
+    }
   ];
   // --------------------------------------------
 
@@ -51,7 +50,7 @@
       </div>
     `;
 
-    // Плавное появление (оставляем твою логику, она отличная)
+    // Плавное появление
     card.style.opacity = '0';
     card.style.transform = 'translateY(15px)';
     card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
